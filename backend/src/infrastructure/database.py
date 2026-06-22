@@ -19,7 +19,13 @@ SQLALCHEMY_DATABASE_URL = os.getenv(
 engine = create_async_engine(
     SQLALCHEMY_DATABASE_URL,
     echo=False,
-    future=True
+    future=True,
+    connect_args={
+        "server_settings": {
+            "jit": "off",
+            "response_types": "on"
+        }
+    }
 )
 
 # Async Session Factory
