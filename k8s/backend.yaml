@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: campus-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: campus-backend
+  template:
+    metadata:
+      labels:
+        app: campus-backend
+    spec:
+      containers:
+      - name: campus-backend
+        image: dist_sys_app-main-campus-backend
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: "500m"
+          requests:
+            cpu: "200m"
+        envFrom:
+        - configMapRef:
+            name: campus-config
+        - secretRef:
+            name: campus-secret
+        ports:
+        - containerPort: 8000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: campus-backend-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    app: campus-backend
