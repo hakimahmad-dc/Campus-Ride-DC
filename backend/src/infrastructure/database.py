@@ -23,7 +23,6 @@ engine = create_async_engine(
     connect_args={
         "server_settings": {
             "jit": "off",
-            "response_types": "on"
         }
     }
 )
