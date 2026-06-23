@@ -1,4 +1,4 @@
-# Campus Ride — Distributed Transportation Platform
+# Campus Ride — Distributed Transportation Platform 🚗 🌱
 
 [cite_start]Campus Ride is a real-time, green transportation sharing platform built for a university campus environment[cite: 17]. [cite_start]This application demonstrates a production-ready, three-tier distributed architecture running across containers, managed by Kubernetes orchestration, and deployed to a live cloud environment[cite: 18, 19].
 
